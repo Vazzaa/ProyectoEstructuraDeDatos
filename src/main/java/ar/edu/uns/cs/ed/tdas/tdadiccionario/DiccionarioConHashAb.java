@@ -26,16 +26,6 @@ public class DiccionarioConHashAb<K,V> implements Dictionary<K,V>{
         }
     }
 
-    private void rehas3(){
-        cubetas= cubetas*2;
-        PositionList<Entry<K,V>>[] nuevo = new ListaDoblementeEnlazada[cubetas];
-        for(Entry<K,V> entra: this.entries()){
-            int numero=hash(entra.getKey());
-            nuevo[numero].addLast((Entrada<K,V>)entra);
-        }
-        arreglo=nuevo;
-    }
-
     @Override
     public int size() {
         return cantidad;

@@ -5,18 +5,20 @@ import ar.edu.uns.cs.ed.proyectos.banco.entities.Puesto;
 import ar.edu.uns.cs.ed.proyectos.banco.entities.Tramite;
 import ar.edu.uns.cs.ed.proyectos.banco.entities.Turno;
 import ar.edu.uns.cs.ed.proyectos.banco.util.Par;
+import ar.edu.uns.cs.ed.tdas.tdadiccionario.*;
+
 
 
 public class SucursalBancaria implements SistemaBancario {
 
     // TODO [Tareas T5, T6 y T7] Declarar las estructuras de datos elegidas
     //diccionario para tramite y puesto con hash abierto
-    
+    protected Dictionary<Puesto,Tramite> puestotramite;
 
     public SucursalBancaria() {
         
         // TODO [Tareas T5, T6 y T7] Crear e inicializar las estructuras de datos elegidas
-
+        puestotramite= new DiccionarioConHashAb<Puesto,Tramite>();
     }
 
 
