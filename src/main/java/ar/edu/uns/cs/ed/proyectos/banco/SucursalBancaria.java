@@ -17,12 +17,12 @@ public class SucursalBancaria implements SistemaBancario {
 
     // TODO [Tareas T5, T6 y T7] Declarar las estructuras de datos elegidas
     //diccionario para tramite y puesto con hash abierto
-    protected Dictionary<Puesto,Tramite> puestotramite;
+    protected Dictionary<Tramite,Puesto> puestotramite;
 
     public SucursalBancaria() {
         
         // TODO [Tareas T5, T6 y T7] Crear e inicializar las estructuras de datos elegidas
-        puestotramite= new DiccionarioConHashAb<Puesto,Tramite>();
+        puestotramite= new DiccionarioConHashAb<Tramite,Puesto>();
     }
 
 
@@ -32,14 +32,14 @@ public class SucursalBancaria implements SistemaBancario {
             throw new IllegalArgumentException("Parametros Invalido");
         }
         // TODO [Tarea T5] Implementar el método (ver documentación en la interface implementada SistemaBancario)
-        Iterator<Entry<Puesto,Tramite>> ite = puestotramite.findAll(p).iterator();
+        Iterator<Entry<Tramite,Puesto>> ite = puestotramite.findAll(t).iterator();
         boolean yaEsta = false;
         while (ite.hasNext() && !yaEsta){
-            Entry<Puesto,Tramite> ept = ite.next();
-            yaEsta = ept.getValue().equals(t) && ept.getKey().equals(p);
+            Entry<Tramite,Puesto> ept = ite.next();
+            yaEsta = ept.getKey().equals(t) && ept.getValue().equals(p);
         }
         if (!yaEsta){
-            puestotramite.insert(p, t);
+            puestotramite.insert(t,p);
         }
         
         return !yaEsta;
