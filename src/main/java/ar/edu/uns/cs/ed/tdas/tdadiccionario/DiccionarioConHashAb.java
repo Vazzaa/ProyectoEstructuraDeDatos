@@ -85,7 +85,7 @@ public class DiccionarioConHashAb<K,V> implements Dictionary<K,V>{
         int cubeta = hash(key);
         boolean encontre=false;
         Iterator<Entry<K,V>> ite= arreglo[cubeta].iterator();
-        Entry<K,V> entrada=null;
+        Entry<K,V> entrada=new Entrada<K,V>(key, value);
         while(ite.hasNext() && !encontre){
             entrada=ite.next();
             if(entrada.getKey().equals(key) && entrada.getValue().equals(value)){
@@ -93,7 +93,6 @@ public class DiccionarioConHashAb<K,V> implements Dictionary<K,V>{
             }
         }
         if(!encontre){
-            entrada=new Entrada<K,V>(key, value);
             arreglo[cubeta].addLast(entrada);
             cantidad++;
         }
