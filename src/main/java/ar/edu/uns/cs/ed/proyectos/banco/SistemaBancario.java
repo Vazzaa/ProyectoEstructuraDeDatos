@@ -19,6 +19,7 @@ public interface SistemaBancario {
     //Hola 
     public boolean asociarTramiteAPuesto(Tramite t, Puesto p);
 
+    //Prueba2
     /**
      * Elimina el trámite t de los trámites que pueden atenderse en el puesto p. Se espera que cada asociación
      * entre t y p se guarde una única vez, retornando true si la asociación ya existía y pudo eliminarse, 
