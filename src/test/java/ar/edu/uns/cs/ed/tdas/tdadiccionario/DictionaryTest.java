@@ -2,6 +2,7 @@ package ar.edu.uns.cs.ed.tdas.tdadiccionario;
 
 import ar.edu.uns.cs.ed.tdas.Entry;
 import ar.edu.uns.cs.ed.tdas.excepciones.*;
+import ar.edu.uns.cs.ed.tdas.tdadiccionario.*;
 
 import static org.junit.Assert.*;
 
@@ -22,7 +23,7 @@ public class DictionaryTest {
 
 	private Dictionary<Integer, Integer> getDictionary() {
 
-		return new DiccionarioHashAbierto<Integer, Integer>();
+		return new DiccionarioConHashAb<Integer, Integer>();
 
 	}
 

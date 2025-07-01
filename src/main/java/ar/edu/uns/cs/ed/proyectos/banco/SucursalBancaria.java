@@ -10,7 +10,8 @@ import ar.edu.uns.cs.ed.proyectos.banco.util.Par;
 public class SucursalBancaria implements SistemaBancario {
 
     // TODO [Tareas T5, T6 y T7] Declarar las estructuras de datos elegidas
-
+    //diccionario para tramite y puesto con hash abierto
+    
 
     public SucursalBancaria() {
         
