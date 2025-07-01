@@ -1,11 +1,15 @@
 package ar.edu.uns.cs.ed.proyectos.banco;
 
+import java.util.Iterator;
+
 import ar.edu.uns.cs.ed.proyectos.banco.entities.Persona;
 import ar.edu.uns.cs.ed.proyectos.banco.entities.Puesto;
 import ar.edu.uns.cs.ed.proyectos.banco.entities.Tramite;
 import ar.edu.uns.cs.ed.proyectos.banco.entities.Turno;
 import ar.edu.uns.cs.ed.proyectos.banco.util.Par;
+import ar.edu.uns.cs.ed.tdas.Entry;
 import ar.edu.uns.cs.ed.tdas.tdadiccionario.*;
+import ar.edu.uns.cs.ed.tdas.tdalista.*;
 
 
 
@@ -24,10 +28,21 @@ public class SucursalBancaria implements SistemaBancario {
 
     @Override
     public boolean asociarTramiteAPuesto(Tramite t, Puesto p) {
-
+        if (t == null || p == null){
+            throw new IllegalArgumentException("Parametros Invalido");
+        }
         // TODO [Tarea T5] Implementar el método (ver documentación en la interface implementada SistemaBancario)
+        Iterator<Entry<Puesto,Tramite>> ite = puestotramite.findAll(p).iterator();
+        boolean yaEsta = false;
+        while (ite.hasNext() && !yaEsta){
+            Entry<Puesto,Tramite> ept = ite.next();
+            yaEsta = ept.getValue().equals(t) && ept.getKey().equals(p);
+        }
+        if (!yaEsta){
+            puestotramite.insert(p, t);
+        }
         
-        return false;
+        return !yaEsta;
     }
 
     @Override
