@@ -16,6 +16,7 @@ public interface SistemaBancario {
      * @return true si el trámite fue asociado exitosamente (no existía asociado), false en caso contrario
      * @throws java.lang.IllegalArgumentException si t o p son nulos
      */
+    //Hola 
     public boolean asociarTramiteAPuesto(Tramite t, Puesto p);
 
     /**
