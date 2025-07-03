@@ -73,8 +73,16 @@ public class SucursalBancaria implements SistemaBancario {
     public Iterable<Tramite> obtenerTramitesAsociadosAPuesto(Puesto p) {
         
         // TODO [Tarea T5] Implementar el método (ver documentación en la interface implementada SistemaBancario)
-        
-        return null;
+        if (p==null){
+            throw new IllegalArgumentException("Puesto invalido");
+        }
+        PositionList<Tramite> resultado = new ListaDoblementeEnlazada<Tramite>();
+        for (Entry<Tramite,Puesto> e : puestotramite.entries()){
+            if (e.getValue().equals(p)){
+                resultado.addLast(e.getKey());
+            }
+        }
+        return resultado;
     }
 
     @Override
