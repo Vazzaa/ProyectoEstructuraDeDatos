@@ -91,8 +91,14 @@ public class SucursalBancaria implements SistemaBancario {
     public int obtenerCantidadDePuestosAtendiendoElTramite(Tramite t) {
         
         // TODO [Tarea T5] Implementar el método (ver documentación en la interface implementada SistemaBancario)
-        
-        return 0;
+        if (t==null){
+            throw new IllegalArgumentException("Tramite invalido");
+        }
+        int cont = 0;
+        for (Entry<Tramite,Puesto> e : puestotramite.findAll(t)){
+            cont++;
+        }
+        return cont;
     }
 
 
