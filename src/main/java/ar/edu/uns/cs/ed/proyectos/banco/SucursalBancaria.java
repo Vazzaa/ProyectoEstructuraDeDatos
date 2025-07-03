@@ -1,5 +1,7 @@
 package ar.edu.uns.cs.ed.proyectos.banco;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Iterator;
 
 import ar.edu.uns.cs.ed.proyectos.banco.entities.Persona;

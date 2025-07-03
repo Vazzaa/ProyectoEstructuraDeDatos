@@ -10,6 +10,7 @@ import ar.edu.uns.cs.ed.tdas.excepciones.InvalidKeyException;
 import ar.edu.uns.cs.ed.tdas.tdalista.ListaDoblementeEnlazada;
 import ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
 
+
 public class DiccionarioConHashAb<K,V> implements Dictionary<K,V>{
 
     private int cubetas;
@@ -24,6 +25,16 @@ public class DiccionarioConHashAb<K,V> implements Dictionary<K,V>{
         for(int i=0; i<cubetas;i++){
             arreglo[i] = new ListaDoblementeEnlazada<Entry<K,V>>();
         }
+    }
+
+    private void rehas3(){
+        cubetas= cubetas*2;
+        PositionList<Entry<K,V>>[] nuevo = new ListaDoblementeEnlazada[cubetas];
+        for(Entry<K,V> entra: this.entries()){
+            int numero=hash(entra.getKey());
+            nuevo[numero].addLast((Entrada<K,V>)entra);
+        }
+        arreglo=nuevo;
     }
 
     @Override
@@ -85,7 +96,7 @@ public class DiccionarioConHashAb<K,V> implements Dictionary<K,V>{
         int cubeta = hash(key);
         boolean encontre=false;
         Iterator<Entry<K,V>> ite= arreglo[cubeta].iterator();
-        Entry<K,V> entrada=new Entrada<K,V>(key, value);
+        Entry<K,V> entrada=null;
         while(ite.hasNext() && !encontre){
             entrada=ite.next();
             if(entrada.getKey().equals(key) && entrada.getValue().equals(value)){
@@ -93,6 +104,7 @@ public class DiccionarioConHashAb<K,V> implements Dictionary<K,V>{
             }
         }
         if(!encontre){
+            entrada=new Entrada<K,V>(key, value);
             arreglo[cubeta].addLast(entrada);
             cantidad++;
         }
@@ -126,7 +138,6 @@ public class DiccionarioConHashAb<K,V> implements Dictionary<K,V>{
         }
     }
 
-    @Override
     public Iterable<Entry<K, V>> entries() {
         PositionList<Entry<K,V>> resultado= new ListaDoblementeEnlazada<Entry<K,V>>();
         for(int i=0;i<cubetas;i++){
@@ -136,6 +147,7 @@ public class DiccionarioConHashAb<K,V> implements Dictionary<K,V>{
         }
         return resultado;
     }
+
 
     private int hash(K key) {
         return Math.abs(key.hashCode() % cubetas);
@@ -170,5 +182,6 @@ public class DiccionarioConHashAb<K,V> implements Dictionary<K,V>{
     }
     return input;
     }
+
 
 }
