@@ -140,8 +140,26 @@ public class SucursalBancaria implements SistemaBancario {
     public int obtenerTiempoDeEsperaEstimado(Turno t) {
         
         // TODO [Tarea T6] Implementar el método (ver documentación en la interface implementada SistemaBancario)
-        
-        return 0;
+        if (t==null){
+            throw new IllegalArgumentException("Turno invalido");
+        }
+        boolean encontre = false;
+        int cantAnteriores = 0;
+        Iterator<Turno> ite = listaturno.iterator();
+        while (ite.hasNext() && !encontre){
+            Turno tsig = ite.next();
+            if (tsig.equals(t)){
+                encontre = true;
+            }
+            else if (tsig.getCodigo()==t.getCodigo()){
+                cantAnteriores++;
+            }
+        }
+        if (!encontre){
+            throw new IllegalStateException("Turno invalido");
+        }
+
+        return (t.getTramite().getDuracionEstimadaEnMinutos() * cantAnteriores)/obtenerCantidadDePuestosAtendiendoElTramite(t.getTramite());
     }
 
 
