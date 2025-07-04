@@ -10,6 +10,7 @@ import ar.edu.uns.cs.ed.proyectos.banco.entities.Tramite;
 import ar.edu.uns.cs.ed.proyectos.banco.entities.Turno;
 import ar.edu.uns.cs.ed.proyectos.banco.util.Par;
 import ar.edu.uns.cs.ed.tdas.Entry;
+import ar.edu.uns.cs.ed.tdas.tdacola.Queue;
 import ar.edu.uns.cs.ed.tdas.tdadiccionario.*;
 import ar.edu.uns.cs.ed.tdas.tdalista.*;
 
@@ -20,11 +21,13 @@ public class SucursalBancaria implements SistemaBancario {
     // TODO [Tareas T5, T6 y T7] Declarar las estructuras de datos elegidas
     //diccionario para tramite y puesto con hash abierto
     protected Dictionary<Tramite,Puesto> puestotramite;
+    protected Queue<Turno> colaturno;
 
     public SucursalBancaria() {
         
         // TODO [Tareas T5, T6 y T7] Crear e inicializar las estructuras de datos elegidas
         puestotramite= new DiccionarioConHashAb<Tramite, Puesto>();
+        colaturno= new 
     }
 
 
@@ -81,7 +84,7 @@ public class SucursalBancaria implements SistemaBancario {
         PositionList<Tramite> resultado = new ListaDoblementeEnlazada<Tramite>();
         for (Entry<Tramite,Puesto> e : puestotramite.entries()){
             if (e.getValue().equals(p)){
-                resultado.addLast(e.getKey());
+                resultado.addLast(e.getKey());  
             }
         }
         return resultado;
