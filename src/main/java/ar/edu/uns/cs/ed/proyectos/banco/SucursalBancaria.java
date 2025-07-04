@@ -23,7 +23,7 @@ public class SucursalBancaria implements SistemaBancario {
     // TODO [Tareas T5, T6 y T7] Declarar las estructuras de datos elegidas
     //diccionario para tramite y puesto con hash abierto
     protected Dictionary<Tramite,Puesto> puestotramite;
-    protected Queue<Turno> colaturno;
+    protected ListaDoblementeEnlazada<Turno> listaturno;
     protected Map<Character,Integer> codigocantidad;
 
     public SucursalBancaria() {
@@ -31,7 +31,7 @@ public class SucursalBancaria implements SistemaBancario {
         // TODO [Tareas T5, T6 y T7] Crear e inicializar las estructuras de datos elegidas
 
         puestotramite= new DiccionarioConHashAb<Tramite, Puesto>();
-        colaturno= new ColaConNodos<Turno>();
+        listaturno= new ListaDoblementeEnlazada<Turno>();
         codigocantidad = new MapeoConHash<Character,Integer>();
         codigocantidad.put('C',1);
         codigocantidad.put('A',1);
@@ -129,7 +129,7 @@ public class SucursalBancaria implements SistemaBancario {
             if((!p.esCliente() && (t.getCodigo()=='B' || t.getCodigo()=='C')) || p.esCliente()){
                 tu = new Turno(t, codigocantidad.get(t.getCodigo()), p);
                 codigocantidad.put(t.getCodigo(), tu.getNumero()+1);
-                colaturno.enqueue(tu);
+                listaturno.addLast(tu);
                 p.setTurno(tu);
             }
         }
