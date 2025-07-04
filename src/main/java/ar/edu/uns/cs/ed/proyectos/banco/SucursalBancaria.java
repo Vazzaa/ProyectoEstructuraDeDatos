@@ -10,9 +10,11 @@ import ar.edu.uns.cs.ed.proyectos.banco.entities.Tramite;
 import ar.edu.uns.cs.ed.proyectos.banco.entities.Turno;
 import ar.edu.uns.cs.ed.proyectos.banco.util.Par;
 import ar.edu.uns.cs.ed.tdas.Entry;
+import ar.edu.uns.cs.ed.tdas.tdacola.ColaConNodos;
 import ar.edu.uns.cs.ed.tdas.tdacola.Queue;
 import ar.edu.uns.cs.ed.tdas.tdadiccionario.*;
 import ar.edu.uns.cs.ed.tdas.tdalista.*;
+import ar.edu.uns.cs.ed.tdas.tdamapeo.*;
 
 
 
@@ -22,12 +24,21 @@ public class SucursalBancaria implements SistemaBancario {
     //diccionario para tramite y puesto con hash abierto
     protected Dictionary<Tramite,Puesto> puestotramite;
     protected Queue<Turno> colaturno;
+    protected Map<Character,Integer> codigocantidad;
 
     public SucursalBancaria() {
         
         // TODO [Tareas T5, T6 y T7] Crear e inicializar las estructuras de datos elegidas
+
         puestotramite= new DiccionarioConHashAb<Tramite, Puesto>();
-        colaturno= new 
+        colaturno= new ColaConNodos<Turno>();
+        codigocantidad = new MapeoConHash<Character,Integer>();
+        codigocantidad.put('C',1);
+        codigocantidad.put('A',1);
+        codigocantidad.put('B',1);
+        codigocantidad.put('T',1);
+        codigocantidad.put('X',1);
+        codigocantidad.put('O',1);
     }
 
 
@@ -110,8 +121,19 @@ public class SucursalBancaria implements SistemaBancario {
     public Turno sacarTurno(Persona p, Tramite t) {
         
         // TODO [Tarea T6] Implementar el método (ver documentación en la interface implementada SistemaBancario)
-        
-        return null;
+        if (p == null || t == null){
+            throw new IllegalArgumentException("Persona o Tramite invalidos");
+        }
+        Turno tu = null;
+        if (puestotramite.find(t) != null){
+            if((!p.esCliente() && (t.getCodigo()=='B' || t.getCodigo()=='C')) || p.esCliente()){
+                tu = new Turno(t, codigocantidad.get(t.getCodigo()), p);
+                codigocantidad.put(t.getCodigo(), tu.getNumero()+1);
+                colaturno.enqueue(tu);
+                p.setTurno(tu);
+            }
+        }
+        return tu;
     }
 
     @Override
