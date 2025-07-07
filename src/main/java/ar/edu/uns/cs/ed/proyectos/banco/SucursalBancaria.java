@@ -161,8 +161,8 @@ public class SucursalBancaria implements SistemaBancario {
         if (!encontre){
             throw new IllegalStateException("Turno invalido");
         }
-
-        return (t.getTramite().getDuracionEstimadaEnMinutos() * cantAnteriores)/obtenerCantidadDePuestosAtendiendoElTramite(t.getTramite());
+        double resultado = (double) (t.getTramite().getDuracionEstimadaEnMinutos() * cantAnteriores)/obtenerCantidadDePuestosAtendiendoElTramite(t.getTramite());
+        return (int) Math.ceil(resultado);
     }
 
 
