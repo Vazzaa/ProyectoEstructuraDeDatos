@@ -10,6 +10,7 @@ import ar.edu.uns.cs.ed.proyectos.banco.entities.Tramite;
 import ar.edu.uns.cs.ed.proyectos.banco.entities.Turno;
 import ar.edu.uns.cs.ed.proyectos.banco.util.Par;
 import ar.edu.uns.cs.ed.tdas.Entry;
+import ar.edu.uns.cs.ed.tdas.Position;
 import ar.edu.uns.cs.ed.tdas.tdacola.ColaConNodos;
 import ar.edu.uns.cs.ed.tdas.tdacola.Queue;
 import ar.edu.uns.cs.ed.tdas.tdadiccionario.*;
@@ -23,8 +24,9 @@ public class SucursalBancaria implements SistemaBancario {
     // TODO [Tareas T5, T6 y T7] Declarar las estructuras de datos elegidas
     //diccionario para tramite y puesto con hash abierto
     protected Dictionary<Tramite,Puesto> puestotramite;
-    protected ListaDoblementeEnlazada<Turno> listaturno;
+    protected PositionList<Turno> listaturno;
     protected Map<Character,Integer> codigocantidad;
+    protected PositionList<Par<Turno,Puesto>> ultimos4Llamados;
 
     public SucursalBancaria() {
         
@@ -33,6 +35,7 @@ public class SucursalBancaria implements SistemaBancario {
         puestotramite= new DiccionarioConHashAb<Tramite, Puesto>();
         listaturno= new ListaDoblementeEnlazada<Turno>();
         codigocantidad = new MapeoConHash<Character,Integer>();
+        ultimos4Llamados = new ListaDoblementeEnlazada<Par<Turno, Puesto>>();
         codigocantidad.put('C',1);
         codigocantidad.put('A',1);
         codigocantidad.put('B',1);
@@ -167,16 +170,38 @@ public class SucursalBancaria implements SistemaBancario {
     public Par<Turno, Integer> llamarYAtenderProximoTurno(Puesto p) {
         
         // TODO [Tarea T7] Implementar el método (ver documentación en la interface implementada SistemaBancario)
-        
-        return null;
+        if (p==null){
+            throw new IllegalArgumentException("Puesto Invalido");
+        }
+        boolean atendio = false;
+        Iterator<Position<Turno>> ite = listaturno.positions().iterator();
+        Par<Turno,Integer> resultado = null;
+        while (ite.hasNext() && !atendio){
+            Position<Turno> ps = ite.next();
+            Tramite t = ps.element().getTramite();
+            Iterator<Entry<Tramite,Puesto>> ite2 = puestotramite.findAll(t).iterator();
+            while (ite.hasNext() && !atendio){
+                Puesto pu = ite2.next().getValue();
+                if (pu.equals(p)){
+                    listaturno.remove(ps);
+                    atendio = true;
+                    Par<Turno, Puesto> pr = new Par<Turno,Puesto>(ps.element(), pu);
+                    ultimos4Llamados.addFirst(pr);
+                    if (ultimos4Llamados.size()>4){
+                        ultimos4Llamados.remove(ultimos4Llamados.last());
+                    }
+                    resultado = new Par<Turno,Integer>(ps.element(), t.getDuracionEfectivaEnMinutos());
+                }
+            }
+        }
+        return resultado;
     }
     
     @Override
     public Iterable<Par<Turno, Puesto>> obtenerUltimos4Llamados() {
         
         // TODO [Tarea T7] Implementar el método (ver documentación en la interface implementada SistemaBancario)
-        
-        return null;
+        return ultimos4Llamados;
     }
 
 }
