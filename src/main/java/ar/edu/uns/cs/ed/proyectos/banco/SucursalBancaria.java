@@ -180,7 +180,7 @@ public class SucursalBancaria implements SistemaBancario {
             Position<Turno> ps = ite.next();
             Tramite t = ps.element().getTramite();
             Iterator<Entry<Tramite,Puesto>> ite2 = puestotramite.findAll(t).iterator();
-            while (ite.hasNext() && !atendio){
+            while (ite2.hasNext() && !atendio){
                 Puesto pu = ite2.next().getValue();
                 if (pu.equals(p)){
                     listaturno.remove(ps);
