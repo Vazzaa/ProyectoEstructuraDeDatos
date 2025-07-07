@@ -1,6 +1,6 @@
 package ar.edu.uns.cs.ed.proyectos.banco;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 import java.util.Iterator;
 
@@ -11,8 +11,7 @@ import ar.edu.uns.cs.ed.proyectos.banco.entities.Turno;
 import ar.edu.uns.cs.ed.proyectos.banco.util.Par;
 import ar.edu.uns.cs.ed.tdas.Entry;
 import ar.edu.uns.cs.ed.tdas.Position;
-import ar.edu.uns.cs.ed.tdas.tdacola.ColaConNodos;
-import ar.edu.uns.cs.ed.tdas.tdacola.Queue;
+
 import ar.edu.uns.cs.ed.tdas.tdadiccionario.*;
 import ar.edu.uns.cs.ed.tdas.tdalista.*;
 import ar.edu.uns.cs.ed.tdas.tdamapeo.*;
