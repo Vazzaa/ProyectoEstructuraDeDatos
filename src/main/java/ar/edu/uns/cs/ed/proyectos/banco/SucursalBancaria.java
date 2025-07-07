@@ -20,7 +20,7 @@ import ar.edu.uns.cs.ed.tdas.tdamapeo.*;
 
 public class SucursalBancaria implements SistemaBancario {
 
-    // TODO [Tareas T5, T6 y T7] Declarar las estructuras de datos elegidas
+
     //diccionario para tramite y puesto con hash abierto
     protected Dictionary<Tramite,Puesto> puestotramite;
     protected PositionList<Turno> listaturno;
@@ -29,7 +29,7 @@ public class SucursalBancaria implements SistemaBancario {
 
     public SucursalBancaria() {
         
-        // TODO [Tareas T5, T6 y T7] Crear e inicializar las estructuras de datos elegidas
+
 
         puestotramite= new DiccionarioConHashAb<Tramite, Puesto>();
         listaturno= new ListaDoblementeEnlazada<Turno>();
@@ -49,7 +49,7 @@ public class SucursalBancaria implements SistemaBancario {
         if (t == null || p == null){
             throw new IllegalArgumentException("Parametros Invalido");
         }
-        // TODO [Tarea T5] Implementar el método (ver documentación en la interface implementada SistemaBancario)
+
         Iterator<Entry<Tramite,Puesto>> ite = puestotramite.findAll(t).iterator();
         boolean yaEsta = false;
         while (ite.hasNext() && !yaEsta){
@@ -69,7 +69,7 @@ public class SucursalBancaria implements SistemaBancario {
         if (t == null || p == null){
             throw new IllegalArgumentException("Parametros Invalido");
         }
-        // TODO [Tarea T5] Implementar el método (ver documentación en la interface implementada SistemaBancario)
+
         Iterator<Entry<Tramite,Puesto>> ite = puestotramite.findAll(t).iterator();
         boolean yaEsta = false;
         Entry<Tramite,Puesto> encontrada = null;
@@ -90,7 +90,7 @@ public class SucursalBancaria implements SistemaBancario {
     @Override
     public Iterable<Tramite> obtenerTramitesAsociadosAPuesto(Puesto p) {
         
-        // TODO [Tarea T5] Implementar el método (ver documentación en la interface implementada SistemaBancario)
+
         if (p==null){
             throw new IllegalArgumentException("Puesto invalido");
         }
@@ -106,7 +106,7 @@ public class SucursalBancaria implements SistemaBancario {
     @Override
     public int obtenerCantidadDePuestosAtendiendoElTramite(Tramite t) {
         
-        // TODO [Tarea T5] Implementar el método (ver documentación en la interface implementada SistemaBancario)
+
         if (t==null){
             throw new IllegalArgumentException("Tramite invalido");
         }
@@ -122,7 +122,7 @@ public class SucursalBancaria implements SistemaBancario {
     @Override
     public Turno sacarTurno(Persona p, Tramite t) {
         
-        // TODO [Tarea T6] Implementar el método (ver documentación en la interface implementada SistemaBancario)
+
         if (p == null || t == null){
             throw new IllegalArgumentException("Persona o Tramite invalidos");
         }
@@ -141,7 +141,7 @@ public class SucursalBancaria implements SistemaBancario {
     @Override
     public int obtenerTiempoDeEsperaEstimado(Turno t) {
         
-        // TODO [Tarea T6] Implementar el método (ver documentación en la interface implementada SistemaBancario)
+
         if (t==null){
             throw new IllegalArgumentException("Turno invalido");
         }
@@ -168,7 +168,6 @@ public class SucursalBancaria implements SistemaBancario {
     @Override
     public Par<Turno, Integer> llamarYAtenderProximoTurno(Puesto p) {
         
-        // TODO [Tarea T7] Implementar el método (ver documentación en la interface implementada SistemaBancario)
         if (p==null){
             throw new IllegalArgumentException("Puesto Invalido");
         }
